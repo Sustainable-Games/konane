@@ -25,6 +25,17 @@ for (let i = 0; i < boardSize; i++) {
 }
 
 // Initialize the board state.
+let boardState = [];
+let pieceColor = 0;
+for (let i = 0; i < boardSize; i++) {
+  boardState[i] = [];
+  for (let j = 0; j < boardSize; j++) {
+    boardState[i][j] = pieceColor;
+    pieceColor = (pieceColor + 1) % 2;
+  }
+  pieceColor = (pieceColor + 1) % 2;
+}
+console.table(boardState);
 
 // Prompt the user for the piece color.
 
