@@ -57,9 +57,13 @@ function drawPieces(size, state) {
       if (state[i][j] === 0) {
         ctx.fillStyle = "black";
         ctx.fill();
+        ctx.strokeStyle = "white";
+        ctx.stroke();
       } else {
         ctx.fillStyle = "white";
         ctx.fill();
+        ctx.strokeStyle = "black";
+        ctx.stroke();
       }
     }
   }  
