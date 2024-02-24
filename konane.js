@@ -3,7 +3,7 @@ let canvas = document.getElementById("gameBoard");
 let ctx = canvas.getContext("2d");
 
 // Get the board size from the user.
-let boardSize = 6;
+let boardSize = 4;
 
 // Draw the board.
 function drawBoard(size) {
@@ -17,7 +17,7 @@ function drawBoard(size) {
       ctx.beginPath();
       const x = cellSize / 2 + i * cellSize + 10;
       const y = cellSize / 2 + j * cellSize + 10;
-      const radius = cellSize / 2 - 20;
+      const radius = cellSize / 2 - cellSize / 5;
       const startAngle = 0;
       const endAngle = 2 * Math.PI;
       ctx.arc(x, y, radius, startAngle, endAngle);
@@ -50,7 +50,7 @@ function drawPieces(size, state) {
       ctx.beginPath();
       const x = cellSize / 2 + i * cellSize + 10;
       const y = cellSize / 2 + j * cellSize + 10;
-      const radius = cellSize / 2 - 25;
+      const radius = cellSize / 2 - cellSize / 4;
       const startAngle = 0;
       const endAngle = 2 * Math.PI;
       ctx.arc(x, y, radius, startAngle, endAngle);
@@ -69,8 +69,26 @@ function drawPieces(size, state) {
   }  
 }
 
+// Detect click or touch.
+function getEventPosition(canvas, event) {
+  let rect = canvas.getBoundingClientRect();
+  let x = event.clientX - rect.left;
+  let y = event.clientY - rect.top;
+  selectPiece(x, y);
+}
+
+function selectPiece(eventX, eventY) {
+  console.log("x: " + eventX, "y: " + eventY);
+}
+
 // Initial moves.
 drawBoard(boardSize);
 drawPieces(boardSize, boardState);
 
 // Game loop.
+
+
+// Add event listeners.
+canvas.addEventListener("mousedown", function(e) {
+  getEventPosition(canvas, e);
+});
