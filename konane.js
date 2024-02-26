@@ -2,18 +2,18 @@
 let canvas = document.getElementById("gameBoard");
 let ctx = canvas.getContext("2d");
 
-// Get the board size from the user.
-let boardSize = 4;
+// Get the board size from the user and initialize board parameters.
+let boardSize = 6;
+let boardWidth = canvas.width - 20;
+let boardHeight = canvas.height - 20;
+let cellSize = boardWidth / boardSize;
 
 // Draw the board.
-function drawBoard(size) {
+function drawBoard() {
   ctx.fillStyle = "lightgrey";
-  let boardWidth = canvas.width - 20;
-  let boardHeight = canvas.height - 20;
   ctx.fillRect(10, 10, boardWidth, boardHeight);
-  let cellSize = boardWidth / size;
-  for (let i = 0; i < size; i++) {
-    for (let j = 0; j < size; j++) {
+  for (let i = 0; i < boardSize; i++) {
+    for (let j = 0; j < boardSize; j++) {
       ctx.beginPath();
       const x = cellSize / 2 + i * cellSize + 10;
       const y = cellSize / 2 + j * cellSize + 10;
@@ -42,11 +42,9 @@ console.table(boardState);
 // Prompt the user for the piece color.
 
 // Draw the pieces.
-function drawPieces(size, state) {
-  let boardWidth = canvas.width - 20;
-  let cellSize = boardWidth / size;
-  for (let i = 0; i < size; i++) {
-    for (let j = 0; j < size; j++) {
+function drawPieces(state) {
+  for (let i = 0; i < boardSize; i++) {
+    for (let j = 0; j < boardSize; j++) {
       ctx.beginPath();
       const x = cellSize / 2 + i * cellSize + 10;
       const y = cellSize / 2 + j * cellSize + 10;
@@ -79,11 +77,14 @@ function getEventPosition(canvas, event) {
 
 function selectPiece(eventX, eventY) {
   console.log("x: " + eventX, "y: " + eventY);
+  xIndex = Math.floor(eventX / cellSize);
+  yIndex = Math.floor(eventY / cellSize);
+  console.log("xIndex: " + xIndex, "yIndex: " + yIndex);
 }
 
 // Initial moves.
-drawBoard(boardSize);
-drawPieces(boardSize, boardState);
+drawBoard();
+drawPieces(boardState);
 
 // Game loop.
 
